@@ -79,23 +79,23 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
   return len;
 }
 
-int _write(int file, char *ptr, int len)
-{
-  HAL_UART_Transmit(&huart3, (uint8_t *)ptr, len, 10);
-  return len;
-}
-
-// __attribute__((weak)) int _write(int file, char *ptr, int len)
+// int _write(int file, char *ptr, int len)
 // {
-//   (void)file;
-//   int DataIdx;
-
-//   for (DataIdx = 0; DataIdx < len; DataIdx++)
-//   {
-//     __io_putchar(*ptr++);
-//   }
+//   HAL_UART_Transmit(&huart3, (uint8_t *)ptr, len, 10);
 //   return len;
 // }
+
+__attribute__((weak)) int _write(int file, char *ptr, int len)
+{
+  (void)file;
+  int DataIdx;
+
+  for (DataIdx = 0; DataIdx < len; DataIdx++)
+  {
+    __io_putchar(*ptr++);
+  }
+  return len;
+}
 
 int _close(int file)
 {
