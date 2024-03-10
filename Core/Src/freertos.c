@@ -37,9 +37,10 @@
 
 #include <rosidl_runtime_c/string_functions.h>
 #include <std_msgs/msg/int32.h>
+#include <follower_msgs/msg/input.h>
 /* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
+/* Private typedef -------- ---------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -178,7 +179,8 @@ void StartDefaultTask(void *argument)
 
   // micro-ROS app
   rcl_publisher_t publisher;
-  std_msgs__msg__Int32 msg;
+  // std_msgs__msg__Int32 msg;
+  follower_msgs__msg__Input msg;
   rclc_support_t support;
   rcl_allocator_t allocator;
   rcl_node_t node;
@@ -201,10 +203,15 @@ void StartDefaultTask(void *argument)
   RCCHECK(rclc_publisher_init_default(
       &publisher,
       &node,
-      ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-      "cubemx_publisher"));
+      // ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+      ROSIDL_GET_MSG_TYPE_SUPPORT(follower_msgs, msg, Input),
+      "input"));
 
-  msg.data = 0;
+  // msg.data = 0;
+  msg.u1 = 1.0;
+  msg.u2 = 2.0;
+  msg.u3 = 3.0;
+  msg.u4 = 4.0;
 
   // initialize timer for LED
   HAL_TIM_Base_Start_IT(&htim2);
@@ -219,7 +226,7 @@ void StartDefaultTask(void *argument)
     }
     // RCCHECK(rcl_publish(&publisher, &msg, NULL));
 
-    msg.data++;
+    // msg.data++;
     osDelay(10);
   }
   /* USER CODE END StartDefaultTask */
