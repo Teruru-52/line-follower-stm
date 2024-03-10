@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build",
+      "type": "cmake",
+      "command": "build",
+      "problemMatcher": "$gcc",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "label": "Flash program",
+      "command": "openocd -f ./openocd.cfg -c \"flash_elf build/debug/build/line-follower-stm.elf\"",
+      "problemMatcher": [],
+      "group": "none",
+    }
+  ]
+}
